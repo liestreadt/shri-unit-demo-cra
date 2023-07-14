@@ -49,7 +49,7 @@ jobs:
                   cache: "npm"
 
             - name: install dependencies
-              run: npm ci
+              run: npm
 
             - name: run unit tests
               run: npm
