@@ -52,7 +52,7 @@ jobs:
               run: npm ci
 
             - name: run unit tests
-              run: npm
+              run: npm run test-ci
 
             - name: save artifacts
               if: always()
@@ -60,3 +60,7 @@ jobs:
               with:
                   name: jest-report
                   path: test-report.html
+
+            - name: check for errors
+              if: failure()
+              run: exit 1
