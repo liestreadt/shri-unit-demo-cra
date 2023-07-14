@@ -74,7 +74,7 @@ jobs:
               run: npm ci
 
             - name: run e2e tests
-              run: npm run test-e2e-ci
+              run: npm run e2e-ci
 
             - name: save artifacts
               if: always()
