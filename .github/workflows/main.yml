@@ -3,3 +3,21 @@ name: ci
 on: [push, pull_request]
 
 jobs:
+    commitlint:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: checkout repo to actions
+              uses: actions/checkout@v3
+            - name: install NodeJS
+              uses: actions/setup-node@v3
+              with:
+                  node-version: "latest"
+                  cache: "npm"
+            - name: install commitlint
+              run: |
+                  npm install conventional-changelog-conventionalcommits
+                  npm install commitlint@latest
+            - name: check PR using commitlint
+              if: github.event_name == 'pull_request'
+              run: npx commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
