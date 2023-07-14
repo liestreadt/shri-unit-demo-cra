@@ -34,7 +34,6 @@ jobs:
 
     tests-unit:
         runs-on: ubuntu-latest
-        if: ${{ github.event_name == 'pull_request' }}
 
         steps:
             - name: checkout repo to actions
@@ -49,10 +48,10 @@ jobs:
                   cache: "npm"
 
             - name: install dependencies
-              run: npm
+              run: npm ci
 
             - name: run unit tests
-              run: npm
+              run: npm run test-ci
 
             - name: save artifacts
               if: always()
@@ -60,3 +59,31 @@ jobs:
               with:
                   name: jest-report
                   path: test-report.html
+
+    tests-e2e:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: checkout repo to actions
+              uses: actions/checkout@v3
+              with:
+                  fetch-depth: 0
+
+            - name: install NodeJS
+              uses: actions/setup-node@v3
+              with:
+                  node-version: "latest"
+                  cache: "npm"
+
+            - name: install dependencies
+              run: npm ci
+
+            - name: run e2e tests
+              run: npm run test-ci
+
+            - name: save artifacts
+              if: always()
+              uses: actions/upload-artifact@v2
+              with:
+                  name: playwright-report
+                  path: playwright-report
