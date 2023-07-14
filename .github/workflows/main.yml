@@ -60,7 +60,3 @@ jobs:
               with:
                   name: jest-report
                   path: test-report.html
-
-            - name: check for errors
-              if: failure()
-              run: exit 1
