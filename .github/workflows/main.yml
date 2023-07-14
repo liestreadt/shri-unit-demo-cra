@@ -23,7 +23,6 @@ jobs:
                   npm install conventional-changelog-conventionalcommits
                   npm install commitlint@latest
                   npm install @commitlint/config-conventional
-                  npm install @commitlint/cli
 
             - name: check latest push
               if: github.event_name == 'push'
