@@ -9,6 +9,8 @@ jobs:
         steps:
             - name: checkout repo to actions
               uses: actions/checkout@v3
+              with:
+                  fetch-depth: 0
 
             - name: install NodeJS
               uses: actions/setup-node@v3
@@ -23,10 +25,10 @@ jobs:
                   npm install @commitlint/config-conventional
                   npm install @commitlint/cli
 
+            - name: check latest push
+              if: github.event_name == 'push'
+              run: npx commitlint --from ${{ github.event.before }} --to HEAD --verbose\
+
             - name: check PR using commitlint
               if: github.event_name == 'pull_request'
               run: npx commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
-
-            - name: check latest push
-              if: github.event_name == 'push'
-              run: npx commitlint --from ${{ github.event.before }} --to HEAD --verbose
