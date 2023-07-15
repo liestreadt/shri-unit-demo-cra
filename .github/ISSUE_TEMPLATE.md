@@ -11,7 +11,8 @@ labels: Release
 
 ## Changelog
 
-    {{ env.RELEASE_CHANGELOG }}
+**Changes compare to previous release**
+{{ env.RELEASE_CHANGELOG }}
 
 ## Tests result
 
