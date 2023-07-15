@@ -33,6 +33,7 @@ jobs:
                   writeToFile: false
 
             - name: create or update issue
+              id: issue_step
               uses: JasonEtco/create-an-issue@v2
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -40,8 +41,18 @@ jobs:
                   RELEASE_AUTHOR: ${{ github.actor }}
                   RELEASE_DATE: ${{ github.event.head_commit.timestamp }}
                   RELEASE_CHANGELOG: ${{ steps.changelog_step.outputs.changes }}
-
               with:
                   filename: .github/ISSUE_TEMPLATE.md
                   update_existing: true
                   search_existing: all
+
+            - name: add tests result to issue
+              uses: peter-evans/create-or-update-comment@v3
+              with:
+                  issue-number: ${{ steps.issue_step.outputs.number }}
+                  body: |
+                      ## ${{ github.run_id }} tests result
+                      Report files of tests can be loaded from this [link](${{github.server_url}}/${{ github.repository }}/actions/runs/${{github.run_id}}) (Artifacts section).
+
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
