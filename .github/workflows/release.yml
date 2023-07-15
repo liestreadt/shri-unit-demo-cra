@@ -1,0 +1,48 @@
+name: release
+
+on:
+    push:
+        tags:
+            - "v[0-9]+"
+
+permissions:
+    contents: read
+    issues: write
+
+jobs:
+    commitLint-and-tests:
+        uses: ./.github/workflows/main.yml
+
+    release:
+        needs: commitLint-and-tests
+
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: checkout repo to actions
+              uses: actions/checkout@v3
+              with:
+                  fetch-depth: 0
+
+            - name: create changelog
+              id: changelog_step
+              uses: TripSs/conventional-changelog-action@v3
+              with:
+                  github-token: ${{ secrets.GITHUB_TOKEN }}
+                  output-file: "changelog.md"
+
+            - name: get information for release
+              run: |
+                  echo "RELEASE_VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
+                  echo "RELEASE_AUTHOR=${{ github.actor }}" >> $GITHUB_ENV
+                  echo "RELEASE_DATE=${{ github.event.head_commit.timestamp }}"
+                  echo "RELEASE_CHANGELOG=${{ steps.changelog_step.output.clean_changelog}}"
+
+            - name: create or update issue
+              uses: JasonEtco/create-an-issue@v2
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  filename: .github/ISSUE_TEMPLATE.md
+                  update_existing: true
+                  search_existing: all
