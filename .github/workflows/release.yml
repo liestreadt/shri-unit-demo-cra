@@ -28,7 +28,7 @@ jobs:
               id: changelog_step
               uses: ardalanamini/auto-changelog@v4
               with:
-                  github-token: ${{ github.token }}
+                  github-token: ${{ secrets.GITHUB_TOKEN }}
                   mention-authors: true
                   include-compare-link: true
                   include-pr-links: true
