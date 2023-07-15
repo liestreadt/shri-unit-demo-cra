@@ -1,0 +1,14 @@
+name: commitLint
+
+on: [push]
+
+jobs:
+    commitlint-push:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: create workflow for commitLint
+              uses: ./.github/workflows/commitLintBody.yml
+
+            - name: check PR using commitlint
+              run: npx commitlint --from ${{ github.event.before }} --to HEAD --verbose
