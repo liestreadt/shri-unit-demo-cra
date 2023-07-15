@@ -11,4 +11,4 @@ labels: Release
 
 ## **Changelog**
 
-    {{ env.RELEASE_CHANGELOG}}
+    {{ env.RELEASE_CHANGELOG }}
