@@ -26,17 +26,21 @@ jobs:
 
             - name: create changelog
               id: changelog_step
-              uses: TripSs/conventional-changelog-action@v3
+              uses: ardalanamini/auto-changelog@v4
               with:
-                  github-token: ${{ secrets.GITHUB_TOKEN }}
-                  output-file: "false"
+                  github-token: ${{ github.token }}
+                  mention-authors: true
+                  include-compare-link: true
+                  include-pr-links: true
+                  include-commit-links: true
+                  use-github-autolink: true
 
             - name: get information for release
               run: |
                   echo "RELEASE_VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
                   echo "RELEASE_AUTHOR=${{ github.actor }}" >> $GITHUB_ENV
                   echo "RELEASE_DATE=${{ github.event.head_commit.timestamp }}"
-                  echo "RELEASE_CHANGELOG=${{ steps.changelog_step.output.clean_changelog}}"
+                  echo "RELEASE_CHANGELOG=${{ steps.changelog_step.output.changelog}}"
 
             - name: create or update issue
               uses: JasonEtco/create-an-issue@v2
