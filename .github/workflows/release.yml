@@ -33,6 +33,7 @@ jobs:
                   include-compare-link: true
                   include-pr-links: true
                   include-commit-links: true
+                  semver: false
                   use-github-autolink: true
 
             - name: get information for release
