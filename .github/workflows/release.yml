@@ -32,17 +32,15 @@ jobs:
                   tag: ${{ github.ref_name }}
                   writeToFile: false
 
-            - name: get information for release
-              run: |
-                  echo "RELEASE_VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
-                  echo "RELEASE_AUTHOR=${{ github.actor }}" >> $GITHUB_ENV
-                  echo "RELEASE_DATE=${{ github.event.head_commit.timestamp }}"
-                  echo "RELEASE_CHANGELOG=${{ steps.changelog_step.output.changelog}}"
-
             - name: create or update issue
               uses: JasonEtco/create-an-issue@v2
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  RELEASE_VERSION: ${{ github.ref_name }}
+                  RELEASE_AUTHOR: ${{ github.actor }}
+                  RELEASE_DATE: ${{ github.event.head_commit.timestamp }}
+                  RELEASE_CHANGELOG: ${{ steps.changelog_step.outputs.changelog }}
+
               with:
                   filename: .github/ISSUE_TEMPLATE.md
                   update_existing: true

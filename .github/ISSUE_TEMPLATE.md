@@ -1,5 +1,5 @@
 ---
-title: "Release of [{{ env.RELEASE_VERSION }}] version"
+title: "Release of {{ env.RELEASE_VERSION }} version"
 labels: Release
 ---
 
