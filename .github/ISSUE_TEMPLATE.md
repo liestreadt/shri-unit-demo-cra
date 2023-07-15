@@ -9,6 +9,11 @@ labels: Release
 -   **Author:** {{ env.RELEASE_AUTHOR }}
 -   **Date:** {{ env.RELEASE_DATE | date('dddd, MMMM Do, yyyy') }}
 
-## **Changelog**
+## Changelog
 
     {{ env.RELEASE_CHANGELOG }}
+
+## Tests result
+
+**Tests result №${{ env.RELEASE_TESTS_NUM }}**
+{{ env.RELEASE_TESTS_RESULT_MSG }}
