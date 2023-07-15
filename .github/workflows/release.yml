@@ -41,18 +41,19 @@ jobs:
                   RELEASE_AUTHOR: ${{ github.actor }}
                   RELEASE_DATE: ${{ github.event.head_commit.timestamp }}
                   RELEASE_CHANGELOG: ${{ steps.changelog_step.outputs.changes }}
+                  RELEASE_TESTS_NUM: ${{ github.run_id }}
+                  RELEASE_TESTS_RESULT_MSG: Report files of tests can be loaded from this [link](${{github.server_url}}/${{ github.repository }}/actions/runs/${{github.run_id}}) (Artifacts section).
               with:
                   filename: .github/ISSUE_TEMPLATE.md
                   update_existing: true
                   search_existing: all
 
-            - name: add tests result to issue
-              uses: peter-evans/create-or-update-comment@v3
-              with:
-                  issue-number: ${{ steps.issue_step.outputs.number }}
-                  body: |
-                      ## Tests result №${{ github.run_id }}
-                      Report files of tests can be loaded from this [link](${{github.server_url}}/${{ github.repository }}/actions/runs/${{github.run_id}}) (Artifacts section).
-
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            # - name: add tests result to issue
+            #   uses: peter-evans/create-or-update-comment@v3
+            #   with:
+            #       issue-number: ${{ steps.issue_step.outputs.number }}
+            #       body: |
+            #           ## Tests result №${{ github.run_id }}
+            #           Report files of tests can be loaded from this [link](${{github.server_url}}/${{ github.repository }}/actions/runs/${{github.run_id}}) (Artifacts section).
+            #   env:
+            #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
