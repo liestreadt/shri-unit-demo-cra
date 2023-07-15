@@ -1,4 +1,4 @@
-name: commitLint
+name: commitLintPR
 
 on: [pull_request]
 

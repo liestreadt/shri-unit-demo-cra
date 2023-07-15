@@ -1,4 +1,4 @@
-name: commitLint
+name: commitLintPush
 
 on: [push]
 
