@@ -29,7 +29,7 @@ jobs:
               uses: TripSs/conventional-changelog-action@v3
               with:
                   github-token: ${{ secrets.GITHUB_TOKEN }}
-                  output-file: "changelog.md"
+                  output-file: "false"
 
             - name: get information for release
               run: |
