@@ -39,7 +39,7 @@ jobs:
                   RELEASE_VERSION: ${{ github.ref_name }}
                   RELEASE_AUTHOR: ${{ github.actor }}
                   RELEASE_DATE: ${{ github.event.head_commit.timestamp }}
-                  RELEASE_CHANGELOG: ${{ steps.changelog_step.outputs.changelog }}
+                  RELEASE_CHANGELOG: ${{ steps.changelog_step.outputs.changes }}
 
               with:
                   filename: .github/ISSUE_TEMPLATE.md
