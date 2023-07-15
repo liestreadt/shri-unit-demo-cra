@@ -26,15 +26,11 @@ jobs:
 
             - name: create changelog
               id: changelog_step
-              uses: ardalanamini/auto-changelog@v4
+              uses: requarks/changelog-action@v1
               with:
-                  github-token: ${{ secrets.GITHUB_TOKEN }}
-                  mention-authors: true
-                  include-compare-link: true
-                  include-pr-links: true
-                  include-commit-links: true
-                  semver: false
-                  use-github-autolink: true
+                  token: ${{ github.token }}
+                  tag: ${{ github.ref_name }}
+                  writeToFile: false
 
             - name: get information for release
               run: |
