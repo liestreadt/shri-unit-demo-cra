@@ -15,5 +15,5 @@ labels: Release
 
 ## Tests result
 
-**Tests result №${{ env.RELEASE_TESTS_NUM }}**
+Tests result **№${{ env.RELEASE_TESTS_NUM }}**
 {{ env.RELEASE_TESTS_RESULT_MSG }}
