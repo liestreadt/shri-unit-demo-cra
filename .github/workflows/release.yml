@@ -90,7 +90,7 @@ jobs:
                   issue-number: ${{ needs.release.outputs.issueNum }}
                   body: |
                       ## Deploy № **${{ github.run_id }}**
-                      [Link to deploy](https://liestreadt.github.io/shri-unit-demo-cra/)
+                      #### [Link to deploy](https://liestreadt.github.io/shri-unit-demo-cra/)
                       P.S. Wait couple minutes after this message.
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
