@@ -12,11 +12,7 @@ import { Application } from "./Application";
 it('по адресу /about должна открываться страница "о проекте"', () => {
     const store = initStore();
     const application = (
-        <MemoryRouter
-            basename="/shri-unit-demo-cra"
-            initialEntries={["/about"]}
-            initialIndex={0}
-        >
+        <MemoryRouter initialEntries={["/about"]} initialIndex={0}>
             <Provider store={store}>
                 <Application />
             </Provider>
@@ -31,7 +27,7 @@ it('по адресу /about должна открываться страниц�
 it("если добавить элемент, он появляется в списке", async () => {
     const store = initStore();
     const application = (
-        <BrowserRouter basename="/shri-unit-demo-cra">
+        <BrowserRouter>
             <Provider store={store}>
                 <Application />
             </Provider>
