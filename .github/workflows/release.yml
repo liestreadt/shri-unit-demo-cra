@@ -94,4 +94,4 @@ jobs:
               with:
                   issue-number: ${{ needs.release.outputs.issueNum }}
                   comment: |
-                      ## Deploy is successfull. Issues automatically closed
+                      ## Successfull deployment. Issue automatically closed.
