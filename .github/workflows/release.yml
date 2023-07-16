@@ -6,7 +6,7 @@ on:
             - "v[0-9]+"
 
 permissions:
-    contents: read
+    contents: write
     issues: write
 
 jobs:
@@ -77,7 +77,6 @@ jobs:
               uses: JamesIves/github-pages-deploy-action@v4
               with:
                   folder: build
-                  token: ${{ github.token }}
 
             - name: Comment issue with deploy
               uses: peter-evans/create-or-update-comment@v3
