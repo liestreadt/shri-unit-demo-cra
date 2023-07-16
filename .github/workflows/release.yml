@@ -71,7 +71,7 @@ jobs:
             - name: install dependecies and build
               run: |
                   npm ci
-                  PUBLIC_URL="shri-unit-demo-cra" npm run build
+                  npm run build
 
             - name: deploy
               uses: JamesIves/github-pages-deploy-action@v4
@@ -84,13 +84,13 @@ jobs:
                   issue-number: ${{ needs.release.outputs.issueNum }}
                   body: |
                       ## Deploy № **${{ github.run_id }}**
-                      [Link to deploy]()
+                      [Link to deploy](https://liestreadt.github.io/shri-unit-demo-cra/)
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            - name: Close Issue
-              uses: peter-evans/close-issue@v3
-              with:
-                  issue-number: ${{ needs.release.outputs.issueNum }}
-                  comment: |
-                      ## Deploy is successfull. Issues automatically closed
+            # - name: Close Issue
+            #   uses: peter-evans/close-issue@v3
+            #   with:
+            #       issue-number: ${{ needs.release.outputs.issueNum }}
+            #       comment: |
+            #           ## Deploy is successfull. Issues automatically closed
