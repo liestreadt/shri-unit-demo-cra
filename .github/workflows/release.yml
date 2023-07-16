@@ -62,6 +62,11 @@ jobs:
               with:
                   fetch-depth: 0
 
+            - name: create release branch
+              run: |
+                  git checkout -b release-${{ github.ref_name }}
+                  git push -u origin release-${{ github.ref_name }}
+
             - name: install NodeJS
               uses: actions/setup-node@v3
               with:
@@ -78,7 +83,7 @@ jobs:
               with:
                   folder: build
 
-            - name: Comment issue with deploy
+            - name: comment issue with deploy
               uses: peter-evans/create-or-update-comment@v3
               with:
                   issue-number: ${{ needs.release.outputs.issueNum }}
