@@ -9,15 +9,15 @@ import "./index.css";
 const container = document.getElementById("root");
 
 if (container) {
-  const root = createRoot(container);
+    const root = createRoot(container);
 
-  const store = initStore();
+    const store = initStore();
 
-  root.render(
-    <BrowserRouter>
-      <Provider store={store}>
-        <Application />
-      </Provider>
-    </BrowserRouter>
-  );
+    root.render(
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
+            <Provider store={store}>
+                <Application />
+            </Provider>
+        </BrowserRouter>
+    );
 }
